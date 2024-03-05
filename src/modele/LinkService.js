@@ -1,23 +1,30 @@
 class LinkService {
 
+    #links = []
+    constructor(){
+        for (let i in LINKS)
+        {   
+            links.push({i, label:LINKS[i].label, url:LINKS[i].url})
+            //tableauLiens.push(this.creerLien(i, LINKS[i].label, LINKS[i].url))
+        }
+        return tableauLiens;
+    }
     creerLien(id, label, lien) {
         return {
             id,
             label, 
             lien
         }
-    } 
-    getLinks() {
+    }
 
-        let tableauLiens = [];
-        tableauLiens.push(this.creerLien(1, "Nous contacter", "/contact"));
-        tableauLiens.push(this.creerLien(2, "Nos services", "/services"));
-        tableauLiens.push(this.creerLien(3, "Notre projet", "/projet"));
-        tableauLiens.push(this.creerLien(4, "Notre equipe", "/equipe"));
+    getLink(){
 
-        return tableauLiens;
+    }
+    getLinks(){
+
+        return this.#links
     }
 }
 
-// console.log("Test de la classe :");
-// console.log(new LinkService().getLinks())
+ console.log("Test de la classe :");
+ console.log(new LinkService().getLinks())

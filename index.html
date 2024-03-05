@@ -1,59 +1,50 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 
-<html lang="en">
+    <html lang="en">
 
-<head>
-    <title>My awesome blog</title>
-</head>
+    <head>
+        <title>My awesome blog</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
 
-<body>
-    <div id="app">
-        <!-- la synthaxe {{ variable }} permet d'afficher le contenu de la variable -->
-        <h1>{{ title }}</h1>
+    <body>
+        
+        <div id="app">
+            <h1>{{ title }}</h1>
 
 
-        <nav-bar v-for="link in links"
-                         :title="news.title" 
-                         :description="news.description">
-        </nav-bar>
-    </div>
+            <nav-bar class="navbar navbar-expand-lg navbar-light bg-light" :links="links"></nav-bar>
 
-    <script src="/src/misc/constant.js"></script>
+        </div>
 
-    <!-- Afin de pouvoir importer Vue via la commande import, il est nécessaire de déclarer notre JS comme un module -->
-    <script type="module">
-        import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
+        <script src="/src/misc/constant.js"></script>
+        <script src="/src/modele/LinkService.js"></script>
 
-        import FormAddArticle from '/src/view/form-add-article.js';
-        import AwesomeArticle from '/src/view/awesome-article.js';
-      
-        const app = createApp({
-            //La méthode created() est appelée à la création de l'application
-            created() {
-                document.title = TITLE; //Initialisation de la base <title> à la création de l'application
-            },
-            data() {
-                return {
-                    title: TITLE,
-                    links: []
-                }
-            },
-            methods:{
-                addNews: function(news){
-                    console.log('index.addNews', news);
+        <!-- Afin de pouvoir importer Vue via la commande import, il est nécessaire de déclarer notre JS comme un module -->
+        <script type="module">
+            import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
 
-                    this.allNews.push(news); //this.variable permet d'accéder aux variables contenues dans data()
-                }
-            }
-        });
+            import NavBar from '/src/view/nav-bar.js';
+        
+            const app = createApp({
+                //La méthode created() est appelée à la création de l'application
+                created() {
+                    document.title = "TITLE"; //Initialisation de la base <title> à la création de l'application
+                },
+                data() {
+                    return {
+                        title: "test",
+                        links: LINKS
+                    }
+                },
+            });
 
-        //la méthode component(nomComposantHtml, nomComposantImporte) permet de déclarer un composant utilisable en tant que balise HTML <nom-composant></nom-composant>
-        //Le nom du composant côté JS doit respecté le Pascal case, alors que son utilisation dans le code HTML respecte le kebab case
-        app.component('FormAddArticle', FormAddArticle)
-           .component('AwesomeArticle', AwesomeArticle);
+            //la méthode component(nomComposantHtml, nomComposantImporte) permet de déclarer un composant utilisable en tant que balise HTML <nom-composant></nom-composant>
+            //Le nom du composant côté JS doit respecté le Pascal case, alors que son utilisation dans le code HTML respecte le kebab case
+            app.component('NavBar', NavBar)
 
-        app.mount('#app');
-      </script>
-</body>
+            app.mount('#app');
+        </script>
+    </body>
 
-</html>
+    </html>

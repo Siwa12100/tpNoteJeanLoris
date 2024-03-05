@@ -4,10 +4,9 @@ class LinkService {
     constructor(){
         for (let i in LINKS)
         {   
-            links.push({i, label:LINKS[i].label, url:LINKS[i].url})
+            this.#links.push({i, label:LINKS[i].label, url:LINKS[i].url})
             //tableauLiens.push(this.creerLien(i, LINKS[i].label, LINKS[i].url))
         }
-        return tableauLiens;
     }
     creerLien(id, label, lien) {
         return {
@@ -17,8 +16,9 @@ class LinkService {
         }
     }
 
-    getLink(){
-
+    getLink(url)
+    {
+        return window.location.href + url
     }
     getLinks(){
 

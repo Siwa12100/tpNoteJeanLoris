@@ -13,7 +13,7 @@
             <h1>{{ title }}</h1>
 
 
-            <nav-bar class="navbar navbar-expand-lg navbar-light bg-light" :links="links"></nav-bar>
+            <nav-bar @change-label="changeLabel" git class="navbar navbar-expand-lg navbar-light bg-light" :links="links"></nav-bar>
 
         </div>
 
@@ -37,6 +37,12 @@
                         links: LINKS
                     }
                 },
+                methods:{
+                    changeLabel(newLabel){
+                        console.log("Inside changeLabee function")
+                        this.title = newLabel
+                    }
+                }
             });
 
             //la méthode component(nomComposantHtml, nomComposantImporte) permet de déclarer un composant utilisable en tant que balise HTML <nom-composant></nom-composant>

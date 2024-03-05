@@ -18,8 +18,9 @@ class LinkService {
 
     getLink(url)
     {
-        return window.location.href + url
+        return this.#links.find( element => element.lien == url )
     }
+
     getLinks(){
 
         return this.#links

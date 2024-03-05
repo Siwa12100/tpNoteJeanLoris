@@ -9,7 +9,7 @@ class LinkService {
     } 
     getLinks() {
 
-        tableauLiens = [];
+        let tableauLiens = [];
         tableauLiens.push(this.creerLien(1, "Nous contacter", "/contact"));
         tableauLiens.push(this.creerLien(2, "Nos services", "/services"));
         tableauLiens.push(this.creerLien(3, "Notre projet", "/projet"));
@@ -18,3 +18,6 @@ class LinkService {
         return tableauLiens;
     }
 }
+
+// console.log("Test de la classe :");
+// console.log(new LinkService().getLinks())

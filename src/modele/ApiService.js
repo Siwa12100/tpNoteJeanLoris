@@ -10,7 +10,7 @@ class ApiService {
             throw new SyntaxError("L'url fournie est vide");
         }
 
-        dataJson = fetch(url).then((reponse) => {
+        let dataJson = fetch(url).then((reponse) => {
 
             if (!reponse.ok) {
                 throw new Error("Erreur sur get à l'url : " + url);
@@ -34,3 +34,9 @@ class ApiService {
         });
     }
 }
+
+console.log("---- Tests du service ------");
+
+const service = new ApiService();
+let dataTest = service.getData("https://api.github.com/users/tenderlove");
+console.log("données récupérées : " + dataTest);

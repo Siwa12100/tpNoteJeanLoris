@@ -1,35 +1,40 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 
-    <html lang="en">
-
+<html>
     <head>
         <title>My awesome blog</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
 
-    <body>
+    <body id="app">
         
-        <div id="app">
-            <h1>{{ title }}</h1>
+        <nav-bar @change-label="changeLabel" git class="navbar navbar-expand-lg navbar-light bg-light" :links="links"></nav-bar>
+        <h1>{{ title }}</h1>
 
-
-            <nav-bar @change-label="changeLabel" git class="navbar navbar-expand-lg navbar-light bg-light" :links="links"></nav-bar>
-
-        </div>
+        <router-view></router-view>
 
         <script src="/src/misc/constant.js"></script>
         <script src="/src/modele/LinkService.js"></script>
-
-        <!-- Afin de pouvoir importer Vue via la commande import, il est nécessaire de déclarer notre JS comme un module -->
+        <script type="importmap">
+            { 
+                "imports": {
+                    "vue":               "https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.41/vue.esm-browser.prod.js",
+                    "vue-router":        "https://cdnjs.cloudflare.com/ajax/libs/vue-router/4.1.5/vue-router.esm-browser.min.js",
+                    "@vue/devtools-api": "https://unpkg.com/@vue/devtools-api@6.4.5/lib/esm/index.js"
+                }
+            }
+          </script> 
         <script type="module">
-            import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
+            import { createRouter, createWebHistory } from 'vue-router'
+            import { createApp } from 'vue'
 
-            import NavBar from '/src/view/nav-bar.js';
-        
+            //COMPOSANTS
+            import NavBar from './src/view/nav-bar.js';
+            import Home from './src/view/home.js'
+
             const app = createApp({
-                //La méthode created() est appelée à la création de l'application
-                created() {
-                    document.title = "TITLE"; //Initialisation de la base <title> à la création de l'application
+                created(){
+                    document.title = TITLE
                 },
                 data() {
                     return {
@@ -39,18 +44,20 @@
                 },
                 methods:{
                     changeLabel(newLabel){
-                        console.log("Inside changeLabee function")
                         this.title = newLabel
                     }
                 }
-            });
-
-            //la méthode component(nomComposantHtml, nomComposantImporte) permet de déclarer un composant utilisable en tant que balise HTML <nom-composant></nom-composant>
-            //Le nom du composant côté JS doit respecté le Pascal case, alors que son utilisation dans le code HTML respecte le kebab case
+            })
+            const router = createRouter({
+                routes: [
+                    {path: '/', component:  Home}
+                ],
+                history: createWebHistory()
+            })
+            app.use(router)
             app.component('NavBar', NavBar)
-
             app.mount('#app');  
         </script>
     </body>
 
-    </html>
+</html>

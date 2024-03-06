@@ -3,7 +3,7 @@ class ApiService {
     getData(url) {
 
         if (typeof(url) !== "string") {
-            throw new TypeError("L'Url fournie n'est pas du bon type.");
+            throw new TypeError("L'url fournie n'est pas du bon type.");
         }
 
         if (url === '') {
@@ -25,5 +25,12 @@ class ApiService {
 
     postData(url, data) {
 
+        fetch('https://exemple.com/api/data', {
+            method: 'POST',
+            body: JSON.stringify(data)
+
+        }).catch((erreur) => {
+            console.log(`${erreur.name} : ${erreur.message}`);
+        });
     }
 }

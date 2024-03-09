@@ -30,27 +30,41 @@
 
             //COMPOSANTS
             import NavBar from './src/view/nav-bar.js';
-            import Home from './src/view/home.js'
+
+            //COMPOSANTS PAGE
+            import Home from '/src/view/home.js'
+            import Films from '/src/view/films/films.js'
+            import AddFilm from '/src/view/films/add.js'
 
             const app = createApp({
                 created(){
                     document.title = TITLE
-                },
+                    this.fetchStubLinks()
+            },
                 data() {
                     return {
                         title: "Home",
-                        links: LINKS
+                        links: []
                     }
                 },
                 methods:{
                     changeLabel(newLabel){
                         this.title = newLabel
+                    },
+                    fetchStubLinks(){
+                        fetch("/src/stubs/stubLinks.json")
+                        .then((response) => response.json())
+                        .then((data) => {
+                        this.links = data;
+                        let linkService = new LinkService(this.links)})
                     }
                 }
             })
             const router = createRouter({
                 routes: [
-                    {path: '/', component:  Home}
+                    {path: '/', component:  Home},
+                    { path: '/films', component: Films },
+                    { path: '/films/add', component: AddFilm }
                 ],
                 history: createWebHistory()
             })

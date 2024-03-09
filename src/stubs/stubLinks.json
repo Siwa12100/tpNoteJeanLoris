@@ -1,0 +1,4 @@
+[
+    {"label":"Tous les films", "url": "/films"},
+    {"label":"Ajouter un film", "url": "/films/add"}
+]

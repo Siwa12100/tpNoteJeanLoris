@@ -12,3 +12,4 @@ class Movie {
         this.image = image;
     }
 }
+

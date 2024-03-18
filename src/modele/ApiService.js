@@ -38,5 +38,5 @@ class ApiService {
 console.log("---- Tests du service ------");
 
 const service = new ApiService();
-let dataTest = service.getData("https://api.github.com/users/tenderlove");
+let dataTest = service.getData(4);
 console.log("données récupérées : " + dataTest);

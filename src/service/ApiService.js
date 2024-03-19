@@ -25,7 +25,7 @@ class ApiService {
 
     postData(url, data) {
 
-        fetch('https://exemple.com/api/data', {
+        fetch(url, {
             method: 'POST',
             body: JSON.stringify(data)
 

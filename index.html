@@ -13,8 +13,7 @@
 
         <router-view></router-view>
 
-        <script src="/src/misc/constant.js"></script>
-        <script src="/src/modele/LinkService.js"></script>
+
         <script type="importmap">
             { 
                 "imports": {
@@ -26,10 +25,13 @@
           </script> 
         <script type="module">
             import { createRouter, createWebHistory } from 'vue-router'
-            import { createApp } from 'vue'
+            import { createApp } from 'vue' 
 
-            //COMPOSANTS
-            import NavBar from './src/view/nav-bar.js';
+            //COMPOSANTS qui contituent les pages
+            import NavBar from '/src/view/nav-bar.js';
+            import SearchBar from '/src/view/search-bar.js'
+            import MovieCard from '/src/view/films/movie-card.js';
+
 
             //COMPOSANTS PAGE
             import Home from '/src/view/home.js'
@@ -70,8 +72,14 @@
             })
             app.use(router)
             app.component('NavBar', NavBar)
-            app.mount('#app');  
+            app.component('SearchBar', SearchBar)
+            app.component('MovieCard', MovieCard)
+            app.mount('#app')
         </script>
+
+        <script src="/src/misc/constant.js"></script>
+        <script src="/src/modele/LinkService.js"></script>
+        <script src="/src/modele/ApiService.js"></script>
     </body>
 
 </html>

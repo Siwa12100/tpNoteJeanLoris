@@ -1,14 +1,8 @@
-import MovieCard from './MovieCard.js';
-
 export default {
-    components: {
-        MovieCard
-    },
-
-
     data() {
         return {
-            movies: [] 
+            movies: [],
+            filteredMovies: []
         };
     },
 
@@ -17,6 +11,10 @@ export default {
         isView(movie) {
             this.movies.find((e) => e.id === movie.id).isView = movie.isView;
             localStorage.setItem('films', JSON.stringify(this.movies));
+        },
+        filterMovies(match)
+        {
+            this.filteredMovies = this.movies.filter((movie) => movie.titre.toLowerCase().includes(match.toLowerCase()))
         }
     },
 
@@ -26,6 +24,7 @@ export default {
 
         if (storedFilms) {
             this.movies = JSON.parse(storedFilms);
+            this.filteredMovies = this.movies
 
         } else {
 
@@ -41,12 +40,13 @@ export default {
 
 
     template: `
+        <search-bar @input-filter="filterMovies"></search-bar>
         <div class="container">
 
             <div class="row">
 
                 <movie-card 
-                    v-for="movie in movies" 
+                    v-for="movie in filteredMovies" 
                     :key="movie.id" 
                     :movie="movie"
                     @is-view="isView"

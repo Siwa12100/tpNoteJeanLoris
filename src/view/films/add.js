@@ -16,11 +16,13 @@ export default {
                 id: Date.now(), // Simple générateur d'ID basé sur le timestamp actuel
                 titre: this.titre,
                 description: this.description,
-                image: this.image
+                image: this.image,
+                isView: false
             };
             let films = JSON.parse(localStorage.getItem('films')) || [];
             films.push(newFilm);
             localStorage.setItem('films', JSON.stringify(films));
+
             this.$router.push('/films'); // Redirige l'utilisateur vers la liste des films
         }
     },

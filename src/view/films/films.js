@@ -9,7 +9,12 @@ export default {
             movies: [] 
         };
     },
-
+    methods: {
+        isView(movie){
+            this.movies.find((e) => e.id === movie.id).isView = true
+            localStorage.setItem('films', JSON.stringify(this.movies))
+        }
+    },
     mounted() {
         let storedFilms = localStorage.getItem('films');
         if (storedFilms) {
@@ -32,6 +37,7 @@ export default {
                     v-for="movie in movies" 
                     :key="movie.id" 
                     :movie="movie"
+                    @is-view="isView"
                     class="col-sm-4 mb-4">
                 </movie-card>
             </div>

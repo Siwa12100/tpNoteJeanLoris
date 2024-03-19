@@ -11,7 +11,7 @@ export default {
     },
     methods: {
         isView(movie){
-            this.movies.find((e) => e.id === movie.id).isView = true
+            this.movies.find((e) => e.id === movie.id).isView = movie.isView
             localStorage.setItem('films', JSON.stringify(this.movies))
         }
     },

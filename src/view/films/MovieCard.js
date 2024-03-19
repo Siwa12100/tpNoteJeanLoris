@@ -2,15 +2,10 @@ import { VueElement } from "vue";
 
 export default {
     props: ['movie'],
-    data(){
-        return {
-            view : undefined,
-        }
-    },
     methods:
     {
-        isView(){
-            this.movie.isView = true
+        isView(bool){
+            this.movie.isView = bool
             this.$emit("isView",this.movie) 
         }
     },
@@ -24,8 +19,9 @@ export default {
     <div class="card" style="width: 18rem;">
         <img :src="movie.image" class="card-img-top" alt="Image du film">
         <div class="card-body">
-            <h5 :style='[this.movie.isView ? {color:"green"} : {color:"undefined"}]' class="card-title">{{ movie.titre }}</h5>
-            <button @click="isView">{{movie.isView}}</button>
+            <h5 :style='[this.movie.isView ? {color:"green"} : {color:"black"}]' class="card-title">{{ movie.titre }}</h5>
+            <button @click="isView(true)" v-if="!this.movie.isView">Non vu</button>
+            <button @click="isView(false)" v-else>Vu</button>
             <p class="card-text">{{ truncatedDescription }}</p>
         </div>
     </div>

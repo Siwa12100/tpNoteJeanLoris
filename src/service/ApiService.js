@@ -1,27 +1,26 @@
 class ApiService {
 
-    getData(url) {
-
-        if (typeof(url) !== "string") {
-            throw new TypeError("L'url fournie n'est pas du bon type.");
+    async getData(url) {
+        if (typeof url !== "string") {
+            throw new TypeError("L'URL fournie n'est pas du bon type.");
         }
-
-        if (url === '') {
-            throw new SyntaxError("L'url fournie est vide");
+    
+        if (url.trim() === '') {
+            throw new SyntaxError("L'URL fournie est vide.");
         }
-
-        let dataJson = fetch(url).then((reponse) => {
-
-            if (!reponse.ok) {
-                throw new Error("Erreur sur get à l'url : " + url);
+    
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`Erreur sur GET à l'URL : ${url}`);
             }
-
-            return reponse.json();
-
-        }).catch((erreur) => {
-            console.log(`${erreur.name} : ${erreur.message}`);
-        });
-    };
+            const data = await response.json();
+            return data;    
+        } catch (error) {
+            console.error(`${error.name}: ${error.message}`);
+            throw error; // Re-throwing the error for handling at the caller's level
+        }
+    }
 
     postData(url, data) {
 
@@ -38,5 +37,6 @@ class ApiService {
 console.log("---- Tests du service ------");
 
 const service = new ApiService();
-let dataTest = service.getData(4);
+let dataTest
+let promise =  service.getData("https://my-json-server.typicode.com/horizon-code-academy/fake-movies-api/movies").then(data => dataTest = data)
 console.log("données récupérées : " + dataTest);

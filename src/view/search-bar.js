@@ -4,6 +4,11 @@ export default {
             input: null
         }
     },
+    methods:{
+        change(){
+            console.log(input)
+        }
+    },
     watch:{
         input(){
             this.$emit("inputFilter", this.input)

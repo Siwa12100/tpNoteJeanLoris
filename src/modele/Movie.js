@@ -10,7 +10,10 @@ class Movie {
         this.id = id;
         this.titre = titre;
         this.description = description;
-        this.image = image;
+        if (image == undefined)
+            this.image = 'https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg'
+        else
+            this.image = image;
         this.isView = false;
     }
 }

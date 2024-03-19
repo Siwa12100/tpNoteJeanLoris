@@ -9,13 +9,22 @@ export default {
             movies: [] 
         };
     },
+
     mounted() {
-        fetch('/src/stubs/stubMovie.json') 
-            .then(response => response.json())
-            .then(data => {
-                this.movies = data;
-            });
-    },
+        let storedFilms = localStorage.getItem('films');
+        if (storedFilms) {
+            this.movies = JSON.parse(storedFilms);
+        } else {
+            fetch('/src/stubs/stubMovie.json') 
+                .then(response => response.json())
+                .then(data => {
+                    this.movies = data;
+                    localStorage.setItem('films', JSON.stringify(data)); // Initialise le localStorage
+                });
+        }
+    }, 
+
+
     template: `
         <div class="container">
             <div class="row">
